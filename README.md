@@ -12,7 +12,7 @@ Each skill is a battle-tested operational framework that Claude Code can read, u
 
 ## What's Inside
 
-### 5 Pillars. 15 Skills. Zero Fluff.
+### 5 Pillars. 15 Skills.
 
 | # | Pillar | Skills | What You Get |
 |---|--------|--------|-------------|

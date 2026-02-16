@@ -2,7 +2,7 @@
 
 ### 15 AI-Powered Skills That Turn Claude Code Into Your GTM Co-Pilot
 
-> **The same frameworks used by a $7M ARR agency managing 40+ client campaigns. Now open source.**
+> **The same frameworks used by a $7M ARR agency managing 70+ client campaigns. Now open source.**
 
 Most GTM teams waste 15+ hours a week on work that should be automated — writing cold emails from scratch, manually scoring leads, guessing which campaigns to scale, and reporting on stale data. The GTM Blueprint changes that.
 

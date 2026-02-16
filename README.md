@@ -244,4 +244,4 @@ MIT — Use these however you want. Build on them. Adapt them. Ship them.
 
 **Built by [ColdIQ](https://coldiq.com)** — the GTM agency that runs on AI agents.
 
-*If you want help implementing these frameworks for your business — or you want the full system with automated dashboards, Slack bots, and AI-powered onboarding — [reach out](https://coldiq.com).*
+*If you want help implementing these frameworks for your business — or you want the full system with automated dashboards, Slack bots, and AI-powered onboarding — [reach out](https://www.linkedin.com/in/kenny-damian-90aba221a/).*

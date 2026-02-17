@@ -1,4 +1,4 @@
-# GTM Blueprint
+# GTM Flywheel
 
 ### 15 AI-Powered Skills That Turn Claude Code Into Your GTM Co-Pilot
 

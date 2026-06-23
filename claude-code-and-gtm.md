@@ -179,4 +179,4 @@ The best time to start building your GTM agent architecture was six months ago. 
 
 ---
 
-*Built by [ColdIQ](https://coldiq.com) — the GTM agency that runs on AI agents.*
+*GTM Flywheel is adapted from the GTM Blueprint by ColdIQ and distributed under the MIT License. See the main README for attribution details.*

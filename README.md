@@ -1,12 +1,12 @@
 # GTM Flywheel
 
-### 15 AI-Powered Skills That Turn Claude Code Into Your GTM Co-Pilot
+### 15 Claude Code Skills for GTM Teams
 
-> **The same frameworks used by a $7M ARR agency managing 70+ client campaigns. Now open source.**
+> **A free, open-source collection of structured Claude Code skills for GTM teams.**
 
-Most GTM teams waste 15+ hours a week on work that should be automated — writing cold emails from scratch, manually scoring leads, guessing which campaigns to scale, and reporting on stale data. The GTM Blueprint changes that.
+GTM Flywheel helps GTM teams apply repeatable frameworks to cold email, account qualification, campaign analysis, and sales intelligence.
 
-Each skill is a battle-tested operational framework that Claude Code can read, understand, and execute. They're not prompts. They're **systems** — complete with scoring models, decision trees, templates, and quality benchmarks that produce consistent, deployable results.
+Each skill is a structured operational framework that Claude Code can read and apply. They are more than standalone prompts: each includes scoring models, decision trees, templates, and quality benchmarks designed to make GTM work more consistent.
 
 ---
 
@@ -84,8 +84,8 @@ Claude Code: [Reads SKILL.md] → Walks you through the 6-step process
 
 ### 1. Clone this repo
 ```bash
-git clone https://github.com/kenny589/gtm-blueprint.git
-cd gtm-blueprint
+git clone https://github.com/udaykang-byte/gtm-flywheel.git
+cd gtm-flywheel
 ```
 
 ### 2. Start Claude Code in the repo
@@ -113,7 +113,7 @@ That's it. No setup. No dependencies. No APIs to configure.
 ## Repo Structure
 
 ```
-gtm-blueprint/
+gtm-flywheel/
 │
 ├── README.md                              ← You are here
 ├── CLAUDE.md                              ← Workspace config (Claude Code auto-reads this)
@@ -180,7 +180,7 @@ gtm-blueprint/
 
 ## What Makes This Different
 
-| | ChatGPT Prompts | GTM Blueprint Skills |
+| | ChatGPT Prompts | GTM Flywheel Skills |
 |---|---|---|
 | **Structure** | Freeform text | YAML metadata + consistent sections |
 | **Depth** | Surface-level suggestions | Scoring models, decision trees, diagnostic frameworks |
@@ -242,6 +242,12 @@ MIT — Use these however you want. Build on them. Adapt them. Ship them.
 
 ---
 
-**Built by [ColdIQ](https://coldiq.com)** — the GTM agency that runs on AI agents.
+## Attribution
 
-*If you want help implementing these frameworks for your business — or you want the full system with automated dashboards, Slack bots, and AI-powered onboarding — [reach out](https://www.linkedin.com/in/kenny-damian-90aba221a/).*
+GTM Flywheel is adapted from [GTM Blueprint](https://github.com/kenny589/gtm-blueprint) by [ColdIQ](https://coldiq.com) and distributed under the MIT License.
+
+Original copyright remains with ColdIQ. This repository includes updated documentation and packaging by Uday Kang.
+
+## Maintainer
+
+Maintained by [Uday Kang](https://www.instagram.com/automatewithuday/) (`@automatewithuday`).

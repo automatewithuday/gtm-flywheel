@@ -2,7 +2,7 @@
 
 ## Overview
 
-The GTM Blueprint is not 15 independent skills — it's an interconnected system where each skill feeds into and strengthens the others. This document maps the connections, data flows, and recommended execution sequences.
+The GTM Flywheel is not 15 independent skills — it's an interconnected system where each skill feeds into and strengthens the others. This document maps the connections, data flows, and recommended execution sequences.
 
 ---
 
@@ -10,7 +10,7 @@ The GTM Blueprint is not 15 independent skills — it's an interconnected system
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        GTM BLUEPRINT                            │
+│                        GTM FLYWHEEL                            │
 │                                                                 │
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐        │
 │  │ ICP RESEARCH │    │   SIGNAL    │    │  COLD EMAIL │        │

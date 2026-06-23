@@ -25,8 +25,8 @@ npm install -g @anthropic-ai/claude-code
 ### Step 2: Clone this repo
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/gtm-blueprint.git
-cd gtm-blueprint
+git clone https://github.com/udaykang-byte/gtm-flywheel.git
+cd gtm-flywheel
 ```
 
 ### Step 3: Start Claude Code
@@ -205,4 +205,4 @@ Claude Opus for deep analysis tasks (transcript analysis, deal patterns, ICP res
 
 ---
 
-*Built by [ColdIQ](https://coldiq.com) — the GTM agency that runs on AI agents.*
+*GTM Flywheel is adapted from the GTM Blueprint by ColdIQ and distributed under the MIT License. See the main README for attribution details.*

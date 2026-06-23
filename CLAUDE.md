@@ -1,4 +1,4 @@
-# GTM Blueprint — Claude Code Workspace
+# GTM Flywheel — Claude Code Workspace
 
 ## How to Use This System
 

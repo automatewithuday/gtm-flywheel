@@ -177,6 +177,3 @@ The difference isn't marginal. It's structural. Teams using this architecture op
 
 The best time to start building your GTM agent architecture was six months ago. The second best time is now.
 
----
-
-*GTM Flywheel is adapted from the GTM Blueprint by ColdIQ and distributed under the MIT License. See the main README for attribution details.*

@@ -238,7 +238,7 @@ Found a pattern that works? A framework that's missing? Open a PR. The best GTM 
 
 ## License
 
-MIT — Use these however you want. Build on them. Adapt them. Ship them.
+MIT. Use these however you want. Build on them. Ship them.
 
 ---
 

@@ -203,6 +203,3 @@ These aren't prompts — they're structured operational frameworks. Each skill c
 **Q: What model works best?**
 Claude Opus for deep analysis tasks (transcript analysis, deal patterns, ICP research). Claude Sonnet for execution tasks (writing copy, building sequences, scoring leads).
 
----
-
-*GTM Flywheel is adapted from the GTM Blueprint by ColdIQ and distributed under the MIT License. See the main README for attribution details.*

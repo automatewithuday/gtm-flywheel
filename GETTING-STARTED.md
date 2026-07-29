@@ -25,7 +25,7 @@ npm install -g @anthropic-ai/claude-code
 ### Step 2: Clone this repo
 
 ```bash
-git clone https://github.com/udaykang-byte/gtm-flywheel.git
+git clone https://github.com/automatewithuday/gtm-flywheel.git
 cd gtm-flywheel
 ```
 

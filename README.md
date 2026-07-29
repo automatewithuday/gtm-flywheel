@@ -84,7 +84,7 @@ Claude Code: [Reads SKILL.md] → Walks you through the 6-step process
 
 ### 1. Clone this repo
 ```bash
-git clone https://github.com/udaykang-byte/gtm-flywheel.git
+git clone https://github.com/automatewithuday/gtm-flywheel.git
 cd gtm-flywheel
 ```
 

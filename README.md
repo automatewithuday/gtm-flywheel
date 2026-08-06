@@ -242,12 +242,6 @@ MIT. Use these however you want. Build on them. Ship them.
 
 ---
 
-## Attribution
-
-GTM Flywheel is adapted from [GTM Blueprint](https://github.com/kenny589/gtm-blueprint) by [ColdIQ](https://coldiq.com) and distributed under the MIT License.
-
-Original copyright remains with ColdIQ. This repository includes updated documentation and packaging by Uday Kang.
-
 ## Maintainer
 
 Maintained by [Uday Kang](https://www.instagram.com/automatewithuday/) (`@automatewithuday`).

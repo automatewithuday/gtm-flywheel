@@ -4,6 +4,8 @@
 
 > **A free, open-source collection of structured Claude Code skills for GTM teams.**
 
+Read it as a playbook on the web: [GTM Flywheel](https://martechs.io/playbooks/gtm-flywheel). The full library of 56 installable [GTM skills for Claude Code](https://martechs.io/gtm-skills) lives on the same site.
+
 GTM Flywheel helps GTM teams apply repeatable frameworks to cold email, account qualification, campaign analysis, and sales intelligence.
 
 Each skill is a structured operational framework that Claude Code can read and apply. They are more than standalone prompts: each includes scoring models, decision trees, templates, and quality benchmarks designed to make GTM work more consistent.

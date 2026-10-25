@@ -1,6 +1,6 @@
 # Flywheel: make the skills learn from your results
 
-The 15 skills are the "weights". This folder pulls real outcomes from your outreach tools (read-only),
+The 28 skills are the "weights". This folder pulls real outcomes from your outreach tools (read-only),
 measures which copy wins, and opens a pull request that proposes updates to the skills with the evidence
 attached. You merge or reject. Nothing changes without you.
 

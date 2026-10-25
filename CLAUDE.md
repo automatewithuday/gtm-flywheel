@@ -4,7 +4,7 @@
 
 When you need to perform any GTM task, follow this process:
 
-1. **Identify the relevant skill** from the 5 pillars below
+1. **Identify the relevant skill** from the 7 pillars below
 2. **Read the SKILL.md** at the path listed
 3. **Apply the framework** to the user's specific data and context
 4. **Produce deliverables** using the templates provided in the skill

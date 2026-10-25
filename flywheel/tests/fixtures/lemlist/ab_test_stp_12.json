@@ -1,0 +1,7 @@
+{
+  "stepId": "stp_12",
+  "abTest": true,
+  "emailTemplateBId": "tpl_12B",
+  "subject": "Idea for {{companyName}} (1B)",
+  "message": "<div>Hi {{firstName}},</div><div>Can I send a 2-min Loom?</div>"
+}

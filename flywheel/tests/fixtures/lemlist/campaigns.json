@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "cam_7Hq2xKd9",
+    "name": "Founders - EU SaaS Q4",
+    "emoji": "\ud83d\ude80",
+    "timezone": "Europe/Paris",
+    "labels": [],
+    "createdAt": "2026-09-01T09:00:00.000Z",
+    "createdBy": "usr_abc123",
+    "status": "running",
+    "hasError": false,
+    "errors": []
+  },
+  {
+    "_id": "cam_9Lm4pTz3",
+    "name": "RevOps Leaders - US",
+    "emoji": "\ud83d\ude80",
+    "timezone": "Europe/Paris",
+    "labels": [],
+    "createdAt": "2026-09-01T09:00:00.000Z",
+    "createdBy": "usr_abc123",
+    "status": "running",
+    "hasError": false,
+    "errors": []
+  }
+]

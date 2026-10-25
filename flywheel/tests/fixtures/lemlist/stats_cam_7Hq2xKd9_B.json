@@ -1,0 +1,29 @@
+{
+  "nbLeads": 150,
+  "nbLeadsAnswered": 20,
+  "nbLeadsInterested": 5,
+  "nbLeadsNotInterested": 3,
+  "messagesSent": 318,
+  "delivered": 300,
+  "opened": 120,
+  "clicked": 8,
+  "replied": 22,
+  "invitationAccepted": 40,
+  "meetingBooked": 1,
+  "steps": [
+    {
+      "index": 2,
+      "sequenceId": "seq_1A",
+      "sequenceStep": 1,
+      "invited": 0,
+      "sent": 98,
+      "delivered": 96,
+      "opened": 60,
+      "clicked": 4,
+      "replied": 8,
+      "notDelivered": 0,
+      "bounced": 2,
+      "unsubscribed": 1
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "byDayStats": {},
+  "overallStats": [
+    {
+      "campaignId": 274079,
+      "campaignName": "CEO outreach - DACH",
+      "isCampaignDeleted": false,
+      "profileViews": 90,
+      "postLikes": 0,
+      "follows": 0,
+      "messagesSent": 50,
+      "totalMessageStarted": 40,
+      "totalMessageReplies": 8,
+      "inmailMessagesSent": 0,
+      "totalInmailStarted": 0,
+      "totalInmailReplies": 0,
+      "connectionsSent": 200,
+      "connectionsAccepted": 70,
+      "messageReplyRate": 0.16,
+      "inMailReplyRate": 0,
+      "connectionAcceptanceRate": 0.35
+    },
+    {
+      "campaignId": 274080,
+      "campaignName": "VP Sales - UK",
+      "isCampaignDeleted": false,
+      "profileViews": 90,
+      "postLikes": 0,
+      "follows": 0,
+      "messagesSent": 60,
+      "totalMessageStarted": 40,
+      "totalMessageReplies": 9,
+      "inmailMessagesSent": 0,
+      "totalInmailStarted": 0,
+      "totalInmailReplies": 0,
+      "connectionsSent": 200,
+      "connectionsAccepted": 70,
+      "messageReplyRate": 0.16,
+      "inMailReplyRate": 0,
+      "connectionAcceptanceRate": 0.35
+    }
+  ]
+}

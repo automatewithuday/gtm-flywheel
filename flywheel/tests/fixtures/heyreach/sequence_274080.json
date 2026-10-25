@@ -1,0 +1,31 @@
+{
+  "nodeType": "CONNECTION_REQUEST",
+  "actionDelay": 0,
+  "actionDelayUnit": "HOUR",
+  "payload": {
+    "messages": [
+      "Hi {first_name}, would love to connect (274080A)",
+      "Hey {first_name}, let's connect (274080B)"
+    ],
+    "toBeWithdrawnAfterDays": 14
+  },
+  "conditionalNode": {
+    "nodeType": "MESSAGE",
+    "actionDelay": 2,
+    "actionDelayUnit": "DAY",
+    "payload": {
+      "messages": [
+        "Thanks for connecting! (274080A)",
+        "Great to be connected, {first_name} (274080B)"
+      ],
+      "fallbackMessage": null
+    },
+    "conditionalNode": null,
+    "unconditionalNode": {
+      "nodeType": "END"
+    }
+  },
+  "unconditionalNode": {
+    "nodeType": "END"
+  }
+}

@@ -1,0 +1,67 @@
+{
+ "ok": true,
+ "data": {
+  "campaign_id": 101,
+  "sequences": [
+   {
+    "id": 1,
+    "email_campaign_seq_id": -7999,
+    "seq_number": 1,
+    "seq_type": "EMAIL",
+    "subject_line": "x",
+    "total_stats": {
+     "sent_count": 200,
+     "open_count": 100,
+     "click_count": 0,
+     "reply_count": 16,
+     "positive_reply_count": 8,
+     "bounce_count": 0
+    },
+    "variants": [
+     {
+      "id": 9101,
+      "variant_label": "A",
+      "is_baseline": true,
+      "stats": {
+       "sent_count": 100,
+       "open_count": 50,
+       "click_count": 0,
+       "reply_count": 6,
+       "positive_reply_count": 3,
+       "bounce_count": 0
+      }
+     },
+     {
+      "id": 9102,
+      "variant_label": "B",
+      "is_baseline": false,
+      "stats": {
+       "sent_count": 100,
+       "open_count": 50,
+       "click_count": 0,
+       "reply_count": 10,
+       "positive_reply_count": 5,
+       "bounce_count": 0
+      }
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "email_campaign_seq_id": -7998,
+    "seq_number": 2,
+    "seq_type": "EMAIL",
+    "subject_line": "x",
+    "total_stats": {
+     "sent_count": 90,
+     "open_count": 40,
+     "click_count": 0,
+     "reply_count": 3,
+     "positive_reply_count": 1,
+     "bounce_count": 0
+    },
+    "variants": []
+   }
+  ]
+ }
+}

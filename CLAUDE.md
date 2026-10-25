@@ -66,6 +66,14 @@ Cross-pillar connections:
 - **Lead Prioritization** scores should route leads to different **Sequence Architecture** tiers
 - **Objection Mining** insights should be pre-handled in **Copy Frameworks** step 2-3
 
+## Flywheel (self-learning loop)
+
+`flywheel/` turns campaign outcomes into proposed skill updates. Run it with `/flywheel-learn`.
+- Read-only by construction: adapters can only call allowlisted read endpoints. Never add a write endpoint without asking.
+- `cold-email/copy-frameworks/PLAYBOOK.md` is generated; edit the skill, not the playbook.
+- Skill changes arrive as PRs on `flywheel/<date>` branches with evidence. Humans merge.
+- Human-owned: `flywheel/campaigns.toml` and all threshold tables. Propose changes, never apply them silently.
+
 ## Output Folders
 
 Save deliverables to the appropriate location:
@@ -77,6 +85,7 @@ Save deliverables to the appropriate location:
 | Campaign copy and sequences | `campaigns/` |
 | Performance reports and benchmarks | `reports/` |
 | Transcripts and sales analysis | `transcripts/` |
+| Flywheel learnings (generated) | `reports/`, `learnings/` |
 
 ## Working Conventions
 

@@ -2,3 +2,9 @@
 *.pyc
 __pycache__/
 .env
+
+# flywheel
+flywheel/outcomes.sqlite
+flywheel/.env
+.env
+flywheel/.venv/

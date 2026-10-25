@@ -1,0 +1,30 @@
+{
+  "seq_2A": {
+    "_id": "seq_2A",
+    "level": 0,
+    "steps": [
+      {
+        "_id": "stp_21",
+        "index": 1,
+        "sequenceId": "seq_2A",
+        "sequenceStep": 0,
+        "delay": 0,
+        "type": "linkedinSend",
+        "message": "Hi {{firstName}}, saw {{companyName}} is hiring - keen to connect (c2)."
+      },
+      {
+        "_id": "stp_22",
+        "index": 2,
+        "sequenceId": "seq_2A",
+        "sequenceStep": 1,
+        "delay": 3,
+        "type": "email",
+        "emailTemplateId": "tpl_22",
+        "subject": "Quick question, {{firstName}} (2A)",
+        "message": "<p>Hi {{firstName}},</p><p>Worth a chat about outbound?<br>Thanks &amp; best,<br>Uday</p>",
+        "abTest": true,
+        "emailTemplateBId": "tpl_22B"
+      }
+    ]
+  }
+}

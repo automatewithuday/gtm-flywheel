@@ -1,0 +1,8 @@
+{"success":true,"data":[
+ {"id":9011,"email_campaign_id":102,"seq_number":1,"subject":"Agency margins","follow_up_subject":null,"email_body":"<p>Hi {{first_name}}, how do you track agency margins?</p>",
+  "sequence_variants":[
+   {"id":9111,"variant_name":"Variant A","subject":"Agency margins","email_body":"<p>Hi {{first_name}}, how do you track agency margins?</p>"},
+   {"id":9112,"variant_name":"Variant B","subject":"Retainer churn","email_body":"<p>Hi {{first_name}}, losing retainers lately?</p>"}]},
+ {"id":9012,"email_campaign_id":102,"seq_number":2,"subject":"","follow_up_subject":"Re: Agency margins","email_body":"<p>Any thoughts?</p>",
+  "sequence_variants":[{"id":9113,"variant_name":"Variant A","subject":"","email_body":"<p>Any thoughts?</p>"}]}
+]}

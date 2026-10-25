@@ -1,0 +1,7 @@
+{"success":true,"data":[
+ {"id":9001,"email_campaign_id":101,"seq_number":1,"subject":"Quick question, {{first_name}}","follow_up_subject":null,"email_body":"<p>Hi {{first_name}},</p><p>Saw you run RevOps at {{company}}.</p>",
+  "sequence_variants":[
+   {"id":9101,"variant_name":"Variant A","subject":"Quick question, {{first_name}}","email_body":"<p>Hi {{first_name}},</p><p>Saw you run RevOps at {{company}}.<br>Worth a chat?</p>"},
+   {"id":9102,"variant_name":"Variant B","subject":"{{company}} pipeline","email_body":"<div>Hi {{first_name}},&nbsp;is pipeline reporting a pain?</div>"}]},
+ {"id":9002,"email_campaign_id":101,"seq_number":2,"subject":"","follow_up_subject":"Re: Quick question","email_body":"<p>Bumping this up.</p>","sequence_variants":null}
+]}

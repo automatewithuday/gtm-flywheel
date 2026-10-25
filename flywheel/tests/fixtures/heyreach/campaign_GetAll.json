@@ -1,0 +1,55 @@
+{
+  "totalCount": 2,
+  "items": [
+    {
+      "id": 274079,
+      "name": "CEO outreach - DACH",
+      "creationTime": "2026-09-10T08:00:00Z",
+      "linkedInUserListName": "Leads",
+      "linkedInUserListId": 5001,
+      "campaignAccountIds": [
+        11,
+        12
+      ],
+      "status": "IN_PROGRESS",
+      "progressStats": {
+        "totalUsers": 200,
+        "totalUsersInProgress": 80,
+        "totalUsersPending": 60,
+        "totalUsersFinished": 50,
+        "totalUsersFailed": 10
+      },
+      "excludeAlreadyMessagedGlobal": false,
+      "excludeAlreadyMessagedCampaignAccounts": false,
+      "excludeFirstConnectionCampaignAccounts": false,
+      "excludeFirstConnectionGlobal": false,
+      "excludeNoProfilePicture": false,
+      "excludeListId": null
+    },
+    {
+      "id": 274080,
+      "name": "VP Sales - UK",
+      "creationTime": "2026-09-10T08:00:00Z",
+      "linkedInUserListName": "Leads",
+      "linkedInUserListId": 5002,
+      "campaignAccountIds": [
+        11,
+        12
+      ],
+      "status": "IN_PROGRESS",
+      "progressStats": {
+        "totalUsers": 200,
+        "totalUsersInProgress": 80,
+        "totalUsersPending": 60,
+        "totalUsersFinished": 50,
+        "totalUsersFailed": 10
+      },
+      "excludeAlreadyMessagedGlobal": false,
+      "excludeAlreadyMessagedCampaignAccounts": false,
+      "excludeFirstConnectionCampaignAccounts": false,
+      "excludeFirstConnectionGlobal": false,
+      "excludeNoProfilePicture": false,
+      "excludeListId": null
+    }
+  ]
+}

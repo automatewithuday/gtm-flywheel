@@ -1,0 +1,12 @@
+# HUMAN-OWNED. Copy to campaigns.toml. Tags campaigns so the learner can slice by persona/segment.
+# Table name = tool.campaign_id (quote ids that contain dashes). Untagged campaigns are still learned, as persona "unknown".
+["smartlead".12345]
+persona = "VP Sales"
+segment = "Series B SaaS"
+client = "acme"
+include = true
+
+["instantly"."0f9c1d2e-aaaa-bbbb-cccc-000000000001"]
+persona = "Head of Marketing"
+segment = "Ecommerce 50-200"
+include = true

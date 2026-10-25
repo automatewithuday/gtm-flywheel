@@ -1,0 +1,44 @@
+{
+  "nbLeads": 150,
+  "nbLeadsAnswered": 20,
+  "nbLeadsInterested": 6,
+  "nbLeadsNotInterested": 3,
+  "messagesSent": 318,
+  "delivered": 300,
+  "opened": 120,
+  "clicked": 8,
+  "replied": 22,
+  "invitationAccepted": 40,
+  "meetingBooked": 2,
+  "steps": [
+    {
+      "index": 1,
+      "sequenceId": "seq_2A",
+      "sequenceStep": 0,
+      "taskType": "linkedinSend",
+      "invited": 120,
+      "sent": 0,
+      "delivered": 0,
+      "opened": 0,
+      "clicked": 0,
+      "replied": 9,
+      "notDelivered": 0,
+      "bounced": 0,
+      "unsubscribed": 0
+    },
+    {
+      "index": 2,
+      "sequenceId": "seq_2A",
+      "sequenceStep": 1,
+      "invited": 0,
+      "sent": 100,
+      "delivered": 98,
+      "opened": 60,
+      "clicked": 4,
+      "replied": 5,
+      "notDelivered": 0,
+      "bounced": 2,
+      "unsubscribed": 1
+    }
+  ]
+}

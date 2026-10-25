@@ -1,0 +1,21 @@
+{
+  "totalCount": 7,
+  "nextCursor": null,
+  "hasNextPage": false,
+  "items": [
+    {
+      "id": "conv_274079",
+      "campaignId": 274079,
+      "lastMessageText": "Sounds interesting, send times",
+      "totalMessages": 3,
+      "correspondentProfile": {
+        "autoTags": [
+          {
+            "name": "Interested",
+            "campaignId": 274079
+          }
+        ]
+      }
+    }
+  ]
+}

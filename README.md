@@ -53,6 +53,10 @@ Sales Intelligence → feeds insights BACK into everything
 
 Every campaign you run makes every future campaign better — but only if you have the systems to capture and apply the learnings. That's what these skills do.
 
+### The loop actually closes
+
+`flywheel/` makes the diagram real. It pulls outcomes from Smartlead, Instantly, lemlist or HeyReach (read-only, or from a CSV), labels each email with the taxonomy in these skills, ranks what wins with proper confidence intervals, and opens a pull request that proposes updates to the skills with the evidence attached. You merge or reject. Nothing changes without a human. See [flywheel/README.md](flywheel/README.md) or run `/flywheel-learn`.
+
 ---
 
 ## How It Works
@@ -104,6 +108,8 @@ campaign for [your persona] at [your target company type]."
 
 That's it. No setup. No dependencies. No APIs to configure.
 
+**Optional, to make the skills learn from your results:** `cd flywheel && cp .env.example .env`, add a sequencer API key, then `/flywheel-learn`.
+
 **For a detailed walkthrough with 5 starter tasks:** [GETTING-STARTED.md](GETTING-STARTED.md)
 
 **For how Claude Code and GTM work together:** [claude-code-and-gtm.md](claude-code-and-gtm.md)
@@ -118,6 +124,8 @@ That's it. No setup. No dependencies. No APIs to configure.
 gtm-flywheel/
 │
 ├── README.md                              ← You are here
+├── flywheel/                              ← Self-learning loop: read-only adapters, learner, PR proposer
+├── .claude/skills/flywheel-learn/         ← /flywheel-learn command
 ├── CLAUDE.md                              ← Workspace config (Claude Code auto-reads this)
 ├── GETTING-STARTED.md                     ← Setup guide + 5 starter tasks
 ├── claude-code-and-gtm.md                 ← Why AI agents change GTM forever

@@ -10,7 +10,7 @@ The GTM Flywheel is not 15 independent skills — it's an interconnected system 
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        GTM FLYWHEEL                            │
+│                        GTM FLYWHEEL                             │
 │                                                                 │
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐        │
 │  │ ICP RESEARCH │    │   SIGNAL    │    │  COLD EMAIL │        │
@@ -116,7 +116,7 @@ Deal Patterns
     → Analyzes win/loss data for predictive patterns
     → Outputs: Ideal deal profile, targeting adjustments
 
-Step 6: FEEDBACK (Closes the Loop)
+Step 6: FEEDBACK (Closes the Loop — `flywheel/` automates the copy part as reviewed PRs)
 Deal Patterns → ICP Matrix Builder (update scoring criteria)
 Transcript Analysis → Persona Development (update language and pain)
 Winning Copy Extraction → Copy Frameworks (update winning patterns)

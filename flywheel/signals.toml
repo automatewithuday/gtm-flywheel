@@ -1,0 +1,22 @@
+# HUMAN-OWNED. Starting values ported from martechs' agentic-outbound-plays (config/signal_scoring.yaml).
+# flywheel/learn_signals.py never edits this file; it opens a PR with evidence and "# proposed:" comments.
+max_score = 100
+
+[weights]            # points per fresh signal, by who observed it
+first_party = 40     # your own data: website visit, engagement with you, CRM
+second_party = 25    # partner / shared-audience data
+third_party = 10     # public: funding, hiring, news, job change
+
+[freshness_days]     # inclusive [min, max] days before today; signals outside the window are ignored
+job_change    = [14, 45]
+funding       = [0, 28]
+hiring        = [0, 14]
+news          = [0, 30]
+social_intent = [0, 14]
+website_visit = [0, 7]
+engagement    = [0, 30]
+# crm_closed_lost and transcript_mention have no window: handled as NO_WINDOW in score_signals.py
+
+[bands]
+work_today = 80
+sequence_this_week = 40

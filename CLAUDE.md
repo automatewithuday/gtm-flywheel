@@ -10,7 +10,7 @@ When you need to perform any GTM task, follow this process:
 4. **Produce deliverables** using the templates provided in the skill
 5. **Save outputs** to the appropriate folder
 
-## Skill Map (5 Pillars, 15 Skills)
+## Skill Map (7 Pillars, 28 Skills)
 
 ### Cold Email
 | Skill | Path | Use When |
@@ -18,6 +18,7 @@ When you need to perform any GTM task, follow this process:
 | Copy Frameworks | `cold-email/copy-frameworks/SKILL.md` | Writing cold email campaigns for any persona |
 | Sequence Architecture | `cold-email/sequence-architecture/SKILL.md` | Designing multi-step outbound sequences |
 | Personalization Engine | `cold-email/personalization-engine/SKILL.md` | Building personalization workflows at scale |
+| B2B Cold Email Copywriting | `cold-email/b2b-cold-email-copywriting/SKILL.md` | Writing or fixing cold email that must reach the primary inbox and get replies |
 
 ### ICP Research
 | Skill | Path | Use When |
@@ -25,6 +26,8 @@ When you need to perform any GTM task, follow this process:
 | ICP Matrix Builder | `icp-research/icp-matrix-builder/SKILL.md` | Defining target accounts with scoring models |
 | Persona Development | `icp-research/persona-development/SKILL.md` | Building detailed buyer personas from data |
 | Account Qualification | `icp-research/account-qualification/SKILL.md` | Evaluating and scoring target accounts |
+| Buying Committee Mapper | `icp-research/buying-committee-mapper/SKILL.md` | Mapping multiple contacts per account (multithreading) |
+| List Quality Scorecard | `icp-research/list-quality-scorecard/SKILL.md` | Grading an enriched lead list before upload |
 
 ### Signal Scoring
 | Skill | Path | Use When |
@@ -32,6 +35,8 @@ When you need to perform any GTM task, follow this process:
 | Intent Signals | `signal-scoring/intent-signals/SKILL.md` | Detecting and scoring buying intent |
 | Trigger Mapping | `signal-scoring/trigger-mapping/SKILL.md` | Mapping business events to outreach triggers |
 | Lead Prioritization | `signal-scoring/lead-prioritization/SKILL.md` | Ranking leads by conversion probability |
+| Champion Move Detection | `signal-scoring/champion-move-detection/SKILL.md` | Monthly sweep for customer champions who changed jobs |
+| Closed-Won Replication | `signal-scoring/closed-won-replication-play/SKILL.md` | Turning a Closed Won deal into lookalike pipeline |
 
 ### Campaign Analytics
 | Skill | Path | Use When |
@@ -39,6 +44,9 @@ When you need to perform any GTM task, follow this process:
 | Performance Analysis | `campaign-analytics/performance-analysis/SKILL.md` | Analyzing campaign metrics and diagnosing issues |
 | Winning Copy Extraction | `campaign-analytics/winning-copy-extraction/SKILL.md` | Extracting patterns from top-performing emails |
 | Campaign Benchmarking | `campaign-analytics/campaign-benchmarking/SKILL.md` | Benchmarking performance against baselines |
+| Positive Reply Scoring | `campaign-analytics/positive-reply-scoring/SKILL.md` | Classifying replies and measuring positive reply rate vs the 1% bar |
+| Experiment Design | `campaign-analytics/experiment-design/SKILL.md` | Isolating one variable per cold email test |
+| Deliverability Test | `campaign-analytics/deliverability-test/SKILL.md` | Comparing reply/bounce rates by inbox type (SMTP, Gmail, Outlook) |
 
 ### Sales Intelligence
 | Skill | Path | Use When |
@@ -46,6 +54,19 @@ When you need to perform any GTM task, follow this process:
 | Transcript Analysis | `sales-intelligence/transcript-analysis/SKILL.md` | Mining sales call transcripts for insights |
 | Objection Mining | `sales-intelligence/objection-mining/SKILL.md` | Cataloging and pre-handling prospect objections |
 | Deal Patterns | `sales-intelligence/deal-patterns/SKILL.md` | Analyzing win/loss patterns in closed deals |
+
+### ABM
+| Skill | Path | Use When |
+|-------|------|----------|
+| ABM Target Accounts | `abm/abm-target-accounts/SKILL.md` | Building, sizing, scoring and tiering an ABM target account list |
+| ABM Retargeting | `abm/abm-retargeting/SKILL.md` | Planning retargeting and multi-channel plays for target accounts |
+| ABM Measurement | `abm/abm-measurement/SKILL.md` | Choosing account-level metrics, attribution and ROI for ABM |
+
+### Infrastructure
+| Skill | Path | Use When |
+|-------|------|----------|
+| Email Gateway Detection | `infrastructure/email-gateway-detection/SKILL.md` | Finding the secure email gateway or mailbox provider behind each domain |
+| Email Waterfall | `infrastructure/email-waterfall/SKILL.md` | Finding and verifying work emails for people missing them |
 
 ## Workflow Connections
 
@@ -65,6 +86,9 @@ Cross-pillar connections:
 - **Winning Copy Extraction** patterns should inform **Sequence Architecture** designs
 - **Lead Prioritization** scores should route leads to different **Sequence Architecture** tiers
 - **Objection Mining** insights should be pre-handled in **Copy Frameworks** step 2-3
+- **ABM Measurement** results feed **Campaign Benchmarking**
+- **Champion Move Detection** and **Closed-Won Replication** are triggers for **Trigger Mapping**
+- **Buying Committee Mapper** extends **Persona Development** to multithreaded accounts
 
 ## Flywheel (self-learning loop)
 
@@ -72,7 +96,8 @@ Cross-pillar connections:
 - Read-only by construction: adapters can only call allowlisted read endpoints. Never add a write endpoint without asking.
 - `cold-email/copy-frameworks/PLAYBOOK.md` is generated; edit the skill, not the playbook.
 - Skill changes arrive as PRs on `flywheel/<date>` branches with evidence. Humans merge.
-- Human-owned: `flywheel/campaigns.toml` and all threshold tables. Propose changes, never apply them silently.
+- Human-owned: `flywheel/campaigns.toml`, `flywheel/signals.toml` and all threshold tables. Propose changes, never apply them silently.
+- `.claude/hooks/safety-guard.sh` blocks outbound sends, campaign lifecycle calls and destructive shell commands. If it blocks you, ask; do not route around it.
 
 ## Output Folders
 

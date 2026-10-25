@@ -1,8 +1,8 @@
-# System Architecture: How the 15 Skills Connect
+# System Architecture: How the 28 Skills Connect
 
 ## Overview
 
-The GTM Flywheel is not 15 independent skills — it's an interconnected system where each skill feeds into and strengthens the others. This document maps the connections, data flows, and recommended execution sequences.
+The GTM Flywheel is not 28 independent skills — it's an interconnected system where each skill feeds into and strengthens the others. This document maps the connections, data flows, and recommended execution sequences.
 
 ---
 
@@ -154,6 +154,9 @@ Campaign Benchmarking → Lead Prioritization (adjust tier thresholds)
 | Objection Mining | Sequence Architecture | Objection-aware sequence design |
 | Deal Patterns | ICP Matrix Builder | Updated ICP criteria from closed data |
 | Deal Patterns | Account Qualification | Adjusted qualification thresholds |
+| ABM Measurement | Campaign Benchmarking | Account-level results to benchmark |
+| Champion Move Detection, Closed-Won Replication | Trigger Mapping | New trigger events |
+| Buying Committee Mapper | Persona Development | Multithreaded account coverage |
 
 ---
 
@@ -237,8 +240,8 @@ As you use the system, your mastery progresses through stages:
 |-------|------------------|---------------|-----------------|
 | **1. Foundation** | Building first ICP and campaign | 5-6 core skills | Week 1-2 |
 | **2. Optimization** | Analyzing results, testing variants | 8-10 skills | Month 1-2 |
-| **3. Intelligence** | Mining calls, extracting patterns | All 15 skills | Month 2-4 |
-| **4. Compounding** | Full flywheel running, every campaign builds on the last | All 15 skills in continuous loop | Month 4+ |
+| **3. Intelligence** | Mining calls, extracting patterns | All 28 skills | Month 2-4 |
+| **4. Compounding** | Full flywheel running, every campaign builds on the last | All 28 skills in continuous loop | Month 4+ |
 
 Most teams see the biggest ROI jump between Stage 2 and Stage 3 — when sales intelligence starts feeding back into outbound execution.
 

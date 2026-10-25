@@ -1,0 +1,22 @@
+[
+ {
+  "id": 1,
+  "name": "Interested",
+  "sentiment_type": "positive"
+ },
+ {
+  "id": 2,
+  "name": "Meeting Request",
+  "sentiment_type": "positive"
+ },
+ {
+  "id": 3,
+  "name": "Not Interested",
+  "sentiment_type": "negative"
+ },
+ {
+  "id": 4,
+  "name": "Out Of Office",
+  "sentiment_type": null
+ }
+]

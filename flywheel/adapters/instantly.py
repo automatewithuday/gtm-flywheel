@@ -1,4 +1,4 @@
-"""Instantly API v2 adapter. Read-only: GET campaigns/analytics + POST /leads/list (a query, not a write).
+"""Instantly API v2 adapter. Read-only: GET campaigns/analytics + POST /leads/list (a query, not a write); leads are paged UNFILTERED (all contacted).
 
 Assumptions (docs examples only, never verified live):
 - analytics/steps `step` is a 1-based string ("1" in the docs example); if a "0" appears we treat the response as
@@ -15,9 +15,6 @@ BASE_URL = "https://api.instantly.ai/api/v2"
 ALLOW = {("GET", "/campaigns"), ("GET", "/campaigns/{id}"), ("GET", "/campaigns/analytics/steps"),
          ("POST", "/leads/list")}  # POST /leads/list is a read-only query; the ONLY allowed POST
 POSITIVE, MEETING = {1, 2, 3, 4}, {2, 3, 4}
-# Fewer calls: one pass over replied leads (classified locally) instead of 4 interest-status filters.
-# Unverified: FILTER_VAL_REPLIED name/semantics. Leads with a manually set status but no reply would be missed.
-LEAD_FILTER = "FILTER_VAL_REPLIED"
 
 
 def make_client(api_key, dry_run=False):
@@ -69,7 +66,7 @@ def _num(x):
 
 def norm_stats(campaign_id, raw_steps_analytics, raw_leads, as_of):
     base = [r for r in raw_steps_analytics or [] if isinstance(r, dict)]
-    off = 1 if any(_num(r.get("step")) == 0 for r in base) else 0   # 0-based response -> shift to 1-based
+    off = _off(base)   # 0-based response -> shift to 1-based
     pos, meet = {}, {}
     for l in raw_leads or []:
         s, v, st = _num(l.get("email_replied_step")), _num(l.get("email_replied_variant")), l.get("lt_interest_status")
@@ -87,6 +84,31 @@ def norm_stats(campaign_id, raw_steps_analytics, raw_leads, as_of):
     return rows
 
 
+def _replied(l):
+    return _num(l.get("email_replied_step")) is not None or (_num(l.get("email_reply_count")) or 0) > 0
+
+
+def norm_leads(campaign_id, raw_leads, as_of, off=0):
+    """Lead-grain rows. off = step base shift (1 if analytics is 0-based), same as norm_stats."""
+    rows = []
+    for l in raw_leads or []:
+        st = l.get("lt_interest_status")
+        st = st if isinstance(st, int) else None
+        rep = _replied(l)
+        s, v = _num(l.get("email_replied_step")), _num(l.get("email_replied_variant"))
+        ok = rep and s is not None and v is not None
+        rows.append({"tool": TOOL, "campaign_id": campaign_id, "step_no": s + off if ok else None,
+                     "variant": chr(65 + v) if ok else None, "email": l.get("email"),
+                     "status": None if st is None else str(st), "replied": int(rep),
+                     "positive": None if st is None else int(st in POSITIVE),
+                     "meeting": None if st is None else int(st in MEETING), "as_of": as_of})
+    return rows
+
+
+def _off(raw_steps_analytics):
+    return 1 if any(_num(r.get("step")) == 0 for r in raw_steps_analytics or [] if isinstance(r, dict)) else 0
+
+
 def _pages(fetch):
     after = None
     while True:
@@ -102,12 +124,14 @@ def pull(client, since, until, as_of, campaign_ids=None):
     campaigns = norm_campaigns({"items": camps})
     if campaign_ids:
         campaigns = [c for c in campaigns if c["id"] in set(campaign_ids)]
-    out = {"campaigns": campaigns, "steps": [], "stats": []}
+    out = {"campaigns": campaigns, "steps": [], "stats": [], "leads": []}
     for c in campaigns:
         cid = c["id"]
         out["steps"] += norm_steps(cid, client.get("/campaigns/{id}", id=cid))
         an = client.get("/campaigns/analytics/steps", {"campaign_id": cid, "start_date": since, "end_date": until})
         leads = list(_pages(lambda a: client.post("/leads/list", {
-            "campaign": cid, "filter": LEAD_FILTER, "limit": 100, **({"starting_after": a} if a else {})})))
-        out["stats"] += norm_stats(cid, an if isinstance(an, list) else [], leads, as_of)
+            "campaign": cid, "limit": 100, **({"starting_after": a} if a else {})})))
+        an = an if isinstance(an, list) else []
+        out["stats"] += norm_stats(cid, an, leads, as_of)
+        out["leads"] += norm_leads(cid, leads, as_of, _off(an))
     return out

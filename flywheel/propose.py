@@ -13,14 +13,18 @@ import subprocess
 import sys
 from pathlib import Path
 
+import db
 import learn
+import learn_signals
 
 ROOT = learn.ROOT
 EDITABLE = ["cold-email/copy-frameworks/SKILL.md", "cold-email/sequence-architecture/SKILL.md",
-            "campaign-analytics/winning-copy-extraction/SKILL.md", "learnings/"]
+            "campaign-analytics/winning-copy-extraction/SKILL.md", "signal-scoring/intent-signals/SKILL.md",
+            "signal-scoring/trigger-mapping/SKILL.md", "flywheel/signals.toml", "learnings/"]
 GENERATED = ["cold-email/copy-frameworks/PLAYBOOK.md", "reports/"]
-HUMAN_OWNED_HINT = ("Threshold tables ('Metrics That Matter', 'Define Winning Copy') are HUMAN-OWNED: you may propose "
-                    "a new number only by adding a '<!-- proposed: ... (evidence: report row) -->' comment next to it.")
+HUMAN_OWNED_HINT = ("Threshold tables ('Metrics That Matter', 'Define Winning Copy') and flywheel/signals.toml are HUMAN-OWNED: "
+                    "you may propose a new number only by adding a comment next to it ('<!-- proposed: ... (evidence: report row) -->' "
+                    "in markdown, '# proposed: ... (evidence: ...)' in TOML). Never change the value itself.")
 
 
 def git(*args, check=True):
@@ -40,8 +44,11 @@ def frontmatter_ok(path):
     return bool(re.match(r"^---\nname: .+\ndescription: .+\n---\n", text, re.S)) if path.endswith("SKILL.md") else True
 
 
-def ask_claude(report_path, as_of):
-    prompt = f"""You maintain the GTM Flywheel skills. Read {report_path} and cold-email/copy-frameworks/PLAYBOOK.md.
+def ask_claude(report_path, as_of, signal_report=None):
+    extra = (f" Also read {signal_report}: for each signal with verdict raise/lower, add a '# proposed:' comment in "
+             f"flywheel/signals.toml and, if a trigger is clearly confirmed or refuted, a one-line evidence note in "
+             f"signal-scoring/intent-signals/SKILL.md or trigger-mapping/SKILL.md." if signal_report else "")
+    prompt = f"""You maintain the GTM Flywheel skills. Read {report_path} and cold-email/copy-frameworks/PLAYBOOK.md.{extra}
 Then make the smallest edits to these files that the evidence supports: {', '.join(EDITABLE[:-1])}.
 Rules: every changed line must be justified by a specific row in the report (cite it in a trailing HTML comment,
 e.g. <!-- evidence: {as_of} archetype table, The Observation 6.1% vs 3.2%, P=0.94 -->). Do not reorder or rewrite
@@ -71,8 +78,12 @@ def main(argv=None):
 
     learn.main(["--as-of", a.as_of] + (["--by-persona"] if a.by_persona else []))
     report = f"reports/{a.as_of}-copy-learnings.md"
+    signal_report = None
+    if db.connect().execute("SELECT COUNT(*) FROM signal").fetchone()[0]:
+        learn_signals.main(["--as-of", a.as_of])
+        signal_report = f"reports/{a.as_of}-signal-learnings.md"
     if not a.no_llm:
-        ask_claude(report, a.as_of)
+        ask_claude(report, a.as_of, signal_report)
 
     bad = disallowed(changed_paths())
     if bad:
@@ -94,7 +105,7 @@ def main(argv=None):
     if a.no_pr:
         return
     git("push", "-u", "origin", branch)
-    body = (ROOT / report).read_text()
+    body = (ROOT / report).read_text() + (("\n\n" + (ROOT / signal_report).read_text()) if signal_report else "")
     url = subprocess.run(["gh", "pr", "create", "--base", a.base, "--head", branch,
                           "--title", f"Flywheel: copy learnings {a.as_of}",
                           "--body", f"Proposed by `flywheel/propose.py`. Nothing here is applied until you merge.\n\n{body}"],

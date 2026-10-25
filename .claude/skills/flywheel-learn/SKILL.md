@@ -18,17 +18,21 @@ any request that is not on the adapter's read allowlist.
    uv run pull_outcomes.py
    ```
    No API keys? `uv run csv_import.py outcomes.csv` (columns in `csv_import.py`).
+1b. **Signals** (optional): if your plays or skills produced a `signals.csv` (`company_domain, signal_type, party, event_date, source_url`), load it so the signal learner has something to join:
+   ```bash
+   uv run signals_import.py path/to/signals.csv
+   ```
 2. **Classify** new copy (cached by content hash; a rerun costs nothing)
    ```bash
    uv run classify_copy.py --dry-run && uv run classify_copy.py
    ```
-3. **Learn + propose** (branch, report, PLAYBOOK, Claude-drafted cited edits, PR)
+3. **Learn + propose** (branch, copy report + PLAYBOOK, signal report when signals exist, Claude-drafted cited edits, PR)
    ```bash
    uv run propose.py            # add --by-persona once campaigns.toml is filled in
    ```
-4. Report the PR link and the headline winners from `reports/<date>-copy-learnings.md`. Say plainly when
+4. Report the PR link and the headline winners from `reports/<date>-copy-learnings.md` and, if present, the raise/lower verdicts from `reports/<date>-signal-learnings.md`. Say plainly when
    the report declares no winner: that means the sample is too small, not that nothing works.
 
 ## Human-owned
 
-`flywheel/campaigns.toml` (persona/segment tags) and every threshold table in the skills. Propose, never edit.
+`flywheel/campaigns.toml` (persona/segment tags), `flywheel/signals.toml` (signal weights and windows) and every threshold table in the skills. Propose, never edit.

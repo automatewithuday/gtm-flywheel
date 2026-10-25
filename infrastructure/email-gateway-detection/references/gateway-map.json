@@ -1,0 +1,220 @@
+{
+  "_notes": "Suffix match against lowercased MX hostnames (trailing dot stripped). Order does not matter; the longest matching suffix wins. names = vendor labels as Prospeo mx_provider and LeadMagic mx_gateway/mx_provider spell them, matched case-insensitively by Stage 2 and 3. Extend this file whenever a vendor names a host or label that is not here. Confidence: high = widely documented, medium = seen in the wild, verify before relying on it. Names marked verified were seen in a real Deepline response; the rest come from vendor docs.",
+  "gateways": {
+    "proofpoint": {
+      "suffixes": [
+        "pphosted.com",
+        "ppe-hosted.com",
+        "proofpoint.com"
+      ],
+      "confidence": "high",
+      "names": [
+        "Proofpoint"
+      ],
+      "names_verified": [
+        "Proofpoint"
+      ]
+    },
+    "mimecast": {
+      "suffixes": [
+        "mimecast.com",
+        "mimecast.co.za",
+        "mimecast-offshore.com"
+      ],
+      "confidence": "high",
+      "names": [
+        "Mimecast"
+      ]
+    },
+    "barracuda": {
+      "suffixes": [
+        "barracudanetworks.com",
+        "barracuda.com"
+      ],
+      "confidence": "high",
+      "names": [
+        "Barracuda",
+        "Barracuda Networks"
+      ]
+    },
+    "cisco": {
+      "suffixes": [
+        "iphmx.com"
+      ],
+      "confidence": "high",
+      "names": [
+        "Cisco IronPort",
+        "Cisco",
+        "IronPort"
+      ]
+    },
+    "messagelabs": {
+      "suffixes": [
+        "messagelabs.com"
+      ],
+      "confidence": "high",
+      "names": [
+        "MessageLabs",
+        "Symantec",
+        "Symantec.cloud",
+        "Broadcom"
+      ]
+    },
+    "trendmicro": {
+      "suffixes": [
+        "trendmicro.com",
+        "trendmicro.eu"
+      ],
+      "confidence": "medium",
+      "names": [
+        "Trend Micro",
+        "TrendMicro"
+      ]
+    },
+    "sophos": {
+      "suffixes": [
+        "sophos.com"
+      ],
+      "confidence": "medium",
+      "names": [
+        "Sophos"
+      ]
+    },
+    "hornetsecurity": {
+      "suffixes": [
+        "hornetsecurity.com"
+      ],
+      "confidence": "medium",
+      "names": [
+        "Hornetsecurity"
+      ]
+    },
+    "forcepoint": {
+      "suffixes": [
+        "mailcontrol.com"
+      ],
+      "confidence": "medium",
+      "names": [
+        "MailControl",
+        "Forcepoint"
+      ]
+    },
+    "trellix": {
+      "suffixes": [
+        "fireeyecloud.com"
+      ],
+      "confidence": "medium",
+      "names": [
+        "FireEye",
+        "Trellix"
+      ]
+    },
+    "fortimail": {
+      "suffixes": [
+        "fortimailcloud.com"
+      ],
+      "confidence": "medium",
+      "names": [
+        "FortiMail",
+        "Fortinet"
+      ]
+    },
+    "spamtitan": {
+      "suffixes": [
+        "spamtitan.com"
+      ],
+      "confidence": "medium",
+      "names": [
+        "SpamTitan",
+        "TitanHQ"
+      ]
+    },
+    "vadesecure": {
+      "suffixes": [
+        "vadesecure.com"
+      ],
+      "confidence": "medium",
+      "names": [
+        "VadeSecure",
+        "Vade Secure",
+        "Vade"
+      ]
+    },
+    "spamexperts": {
+      "suffixes": [
+        "antispamcloud.com",
+        "spamexperts.com"
+      ],
+      "confidence": "medium",
+      "names": [
+        "SpamExperts",
+        "AntispamCloud"
+      ]
+    },
+    "mailguard": {
+      "suffixes": [
+        "mailguard.com.au"
+      ],
+      "confidence": "medium",
+      "names": [
+        "Mailguard",
+        "MailGuard"
+      ]
+    }
+  },
+  "mailbox_providers": {
+    "google": {
+      "mx_suffixes": [
+        "google.com",
+        "googlemail.com"
+      ],
+      "spf_includes": [
+        "_spf.google.com"
+      ],
+      "names": [
+        "Google",
+        "Google Workspace",
+        "G Suite",
+        "Gmail"
+      ],
+      "names_verified": [
+        "Google Workspace"
+      ]
+    },
+    "microsoft": {
+      "mx_suffixes": [
+        "protection.outlook.com",
+        "outlook.com"
+      ],
+      "spf_includes": [
+        "spf.protection.outlook.com"
+      ],
+      "names": [
+        "Microsoft",
+        "Microsoft 365",
+        "Office 365",
+        "Outlook",
+        "Exchange Online"
+      ],
+      "names_verified": [
+        "Microsoft 365"
+      ]
+    },
+    "zoho": {
+      "mx_suffixes": [
+        "zoho.com",
+        "zoho.eu",
+        "zoho.in"
+      ],
+      "spf_includes": [
+        "zoho.com",
+        "zoho.eu",
+        "zoho.in"
+      ],
+      "names": [
+        "Zoho",
+        "Zoho Mail"
+      ]
+    }
+  }
+}

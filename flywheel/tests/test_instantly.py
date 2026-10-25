@@ -84,6 +84,39 @@ class T(unittest.TestCase):
         self.assertEqual(con.execute("select count(*) from step").fetchone()[0], 6)
         self.assertEqual(con.execute("select sum(positive) from stat").fetchone()[0], 5)
 
+    def test_leads(self):
+        r = run_pull()
+        by = lambda c: [x for x in r["leads"] if x["campaign_id"] == c]
+        self.assertEqual((len(by(C1)), len(by(C2))), (10, 3))   # all contacted, not only repliers
+        L = {x["email"]: x for x in r["leads"]}
+        k = lambda e: (L[e]["status"], L[e]["replied"], L[e]["positive"], L[e]["meeting"], L[e]["step_no"], L[e]["variant"])
+        self.assertEqual(k("b@example.com"), ("2", 1, 1, 1, 1, "A"))
+        self.assertEqual(k("a@example.com"), ("1", 1, 1, 0, 1, "A"))
+        self.assertEqual(k("c@example.com"), ("-1", 1, 0, 0, 1, "A"))
+        self.assertEqual(k("f@example.com"), ("4", 1, 1, 1, 2, "A"))
+        self.assertEqual(k("h@example.com"), (None, 1, None, None, None, None))   # replied, status unknown
+        self.assertEqual(k("i@example.com"), (None, 0, None, None, None, None))   # contacted only
+
+    def test_lead_pagination(self):
+        calls = []
+        def spy(self, method, url, body):
+            if url.endswith("/leads/list"):
+                calls.append(body)
+            return served(self, method, url, body)
+        with mock.patch.object(_http.Client, "_send", spy):
+            instantly.pull(instantly.make_client("k"), "a", "b", "c")
+        self.assertEqual(len(calls), 3)   # c1: 2 pages, c2: 1
+        self.assertTrue(all("filter" not in b and b["limit"] == 100 for b in calls))
+
+    def test_lead_upsert_no_raw_email(self):
+        con = db.connect(":memory:")
+        db.upsert(con, run_pull())
+        self.assertEqual(con.execute("select count(*) from lead_outcome").fetchone()[0], 13)
+        dump = repr([r for t in ("lead_outcome", "stat", "step", "campaign")
+                     for r in con.execute(f"select * from {t}")])
+        self.assertNotIn("a@example.com", dump)
+        self.assertNotIn("@example.com", dump)   # bare domain only
+
     def test_allowlist(self):
         c = instantly.make_client("k", dry_run=True)
         with self.assertRaises(_http.NotAllowed):
@@ -95,7 +128,7 @@ class T(unittest.TestCase):
     def test_dry_run_no_network(self):
         with mock.patch.object(urllib.request, "urlopen", side_effect=AssertionError("network")):
             r = instantly.pull(instantly.make_client("k", dry_run=True), "a", "b", "c")
-        self.assertEqual(r, {"campaigns": [], "steps": [], "stats": []})
+        self.assertEqual(r, {"campaigns": [], "steps": [], "stats": [], "leads": []})
 
 
 if __name__ == "__main__":

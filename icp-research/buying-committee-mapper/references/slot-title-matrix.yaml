@@ -1,0 +1,113 @@
+# Starting title matrices for buying-committee-mapper, one per vertical.
+# These are defaults, not answers. Copy the closest vertical into
+# committee-config.yaml under `buying_committee:` and edit it from the Step 2
+# interview before spending a credit. Patterns are case-insensitive and match
+# on word boundaries; a title that hits a slot's negative_titles never lands
+# in that slot.
+
+bands:
+  - { id: "1-50",     min: 1,    max: 50 }
+  - { id: "51-200",   min: 51,   max: 200 }
+  - { id: "201-1000", min: 201,  max: 1000 }
+  - { id: "1001+",    min: 1001, max: null }
+
+verticals:
+
+  sales_tooling:
+    slots:
+      decision_maker:
+        titles_by_band:
+          "1-50":     ["founder", "co-founder", "ceo", "owner"]
+          "51-200":   ["vp sales", "head of sales", "cro", "chief revenue officer"]
+          "201-1000": ["vp sales", "svp sales", "cro", "chief revenue officer"]
+          "1001+":    ["svp sales", "cro", "chief revenue officer", "vp revenue operations"]
+        negative_titles: ["assistant", "intern", "former", "engineering", "advisor"]
+      champion:
+        titles_by_band:
+          "1-50":     ["head of sales", "head of growth", "sales lead"]
+          "51-200":   ["director sales", "director revenue operations", "head of sales development", "sales ops"]
+          "201-1000": ["director sales development", "director revenue operations", "director sales enablement", "senior director sales"]
+          "1001+":    ["vp sales development", "vp sales enablement", "director revenue operations", "director sales strategy"]
+        negative_titles: ["assistant", "intern", "former"]
+      influencer:
+        titles_by_band:
+          "1-50":     ["sdr", "bdr", "account executive"]
+          "51-200":   ["sdr manager", "bdr manager", "sales development manager", "revops manager"]
+          "201-1000": ["sdr manager", "sales development manager", "revenue operations manager", "sales enablement manager"]
+          "1001+":    ["sales development manager", "revenue operations manager", "sales enablement manager"]
+        negative_titles: ["intern", "former"]
+        max_per_account: 1
+      blocker:
+        titles_by_band:
+          "1-50":     []
+          "51-200":   ["head of it", "it manager", "controller", "finance"]
+          "201-1000": ["procurement", "it director", "security", "legal", "marketing operations"]
+          "1001+":    ["procurement", "vendor management", "ciso", "security", "legal", "it director"]
+        negative_titles: ["intern", "former"]
+        collapse_below_headcount: 50
+
+  developer_and_security_tooling:
+    slots:
+      decision_maker:
+        titles_by_band:
+          "1-50":     ["founder", "co-founder", "cto", "ceo"]
+          "51-200":   ["cto", "vp engineering", "head of engineering", "ciso"]
+          "201-1000": ["vp engineering", "cto", "ciso", "vp platform"]
+          "1001+":    ["vp engineering", "vp platform", "ciso", "vp developer experience", "vp infrastructure"]
+        negative_titles: ["assistant", "intern", "former", "sales", "advisor"]
+      champion:
+        titles_by_band:
+          "1-50":     ["lead engineer", "head of engineering", "staff engineer"]
+          "51-200":   ["engineering manager", "director engineering", "head of platform", "staff engineer"]
+          "201-1000": ["director engineering", "engineering manager", "head of developer experience", "principal engineer"]
+          "1001+":    ["director engineering", "director platform", "director developer experience", "principal engineer"]
+        negative_titles: ["assistant", "intern", "former", "sales"]
+      influencer:
+        titles_by_band:
+          "1-50":     ["software engineer", "developer", "devops"]
+          "51-200":   ["senior software engineer", "devops engineer", "platform engineer", "site reliability engineer"]
+          "201-1000": ["senior software engineer", "platform engineer", "site reliability engineer", "devops engineer"]
+          "1001+":    ["staff software engineer", "platform engineer", "site reliability engineer"]
+        negative_titles: ["intern", "former", "sales engineer"]
+        max_per_account: 1
+      blocker:
+        titles_by_band:
+          "1-50":     []
+          "51-200":   ["security engineer", "head of security", "it manager"]
+          "201-1000": ["security", "compliance", "procurement", "it director", "legal"]
+          "1001+":    ["security", "compliance", "procurement", "vendor management", "legal", "enterprise architect"]
+        negative_titles: ["intern", "former"]
+        collapse_below_headcount: 50
+
+  marketing_and_demand_gen:
+    slots:
+      decision_maker:
+        titles_by_band:
+          "1-50":     ["founder", "co-founder", "ceo", "head of marketing"]
+          "51-200":   ["cmo", "vp marketing", "head of marketing", "head of growth"]
+          "201-1000": ["cmo", "vp marketing", "vp demand generation", "vp growth"]
+          "1001+":    ["vp demand generation", "vp marketing operations", "svp marketing", "vp growth marketing"]
+        negative_titles: ["assistant", "intern", "former", "product marketing", "advisor"]
+      champion:
+        titles_by_band:
+          "1-50":     ["marketing lead", "growth lead", "head of demand"]
+          "51-200":   ["director demand generation", "director marketing", "head of growth", "marketing operations"]
+          "201-1000": ["director demand generation", "director marketing operations", "director growth", "director abm"]
+          "1001+":    ["director demand generation", "director marketing operations", "director abm", "senior director marketing"]
+        negative_titles: ["assistant", "intern", "former"]
+      influencer:
+        titles_by_band:
+          "1-50":     ["marketing manager", "growth marketer", "content"]
+          "51-200":   ["demand generation manager", "marketing operations manager", "growth marketing manager", "paid media"]
+          "201-1000": ["demand generation manager", "marketing operations manager", "abm manager", "paid media manager"]
+          "1001+":    ["demand generation manager", "marketing operations manager", "abm manager", "marketing analyst"]
+        negative_titles: ["intern", "former"]
+        max_per_account: 1
+      blocker:
+        titles_by_band:
+          "1-50":     []
+          "51-200":   ["revenue operations", "sales ops", "it manager", "finance"]
+          "201-1000": ["revenue operations", "procurement", "it director", "legal", "privacy"]
+          "1001+":    ["procurement", "vendor management", "revenue operations", "privacy", "legal", "security"]
+        negative_titles: ["intern", "former"]
+        collapse_below_headcount: 50

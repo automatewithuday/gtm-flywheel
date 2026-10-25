@@ -1,0 +1,14 @@
+domain,full_name,first_name,title,linkedin_url,email,email_status
+acme.com,J. Rivera,J,VP Sales,li/1,j@acme.com,valid
+acme.com,A. Alt,A,"VP, Sales",li/1b,a@acme.com,catch_all
+acme.com,X. Eng,X,VP Sales Engineering,li/1c,x@acme.com,valid
+acme.com,P. Osei,P,Director Sales Ops,li/2,p@acme.com,catch_all
+acme.com,K. Tan,K,SDR Manager,li/3,k@acme.com,valid
+acme.com,L. Two,L,SDR Manager,li/3b,l@acme.com,valid
+acme.com,F. Former,F,Former Head of Sales,li/4,,not_found
+tinyco.io,S. Park,S,Founder,li/5,s@tinyco.io,valid
+bigcorp.com,C. Suite,C,CEO,li/6,c@bigcorp.com,valid
+bigcorp.com,M. Proc,M,Head of Procurement,li/7,m@bigcorp.com,unknown
+bigcorp.com,R. Rev,R,Chief Revenue Officer,li/8,r@bigcorp.com,valid
+nohc.com,N. One,N,VP Sales,li/9,n@nohc.com,valid
+other.com,Z. Zed,Z,CEO,li/10,z@other.com,valid

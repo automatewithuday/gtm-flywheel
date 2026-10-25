@@ -6,7 +6,9 @@ from . import _http
 TOOL = "smartlead"
 BASE_URL = "https://server.smartlead.ai/api/v1"
 ALLOW = {("GET", "/campaigns/"), ("GET", "/campaigns/{id}/sequences"),
-         ("GET", "/campaigns/{id}/sequence-analytics"), ("GET", "/leads/fetch-categories")}
+         ("GET", "/campaigns/{id}/sequence-analytics"), ("GET", "/campaigns/{id}/leads"),
+         ("GET", "/leads/fetch-categories")}
+LEAD_LIMIT = 100
 
 
 def make_client(api_key, dry_run=False):
@@ -83,15 +85,42 @@ def norm_stats(campaign_id, raw_analytics, as_of, raw_sequences=None):
     return rows
 
 
+def norm_leads(campaign_id, raw_leads_pages, categories, as_of):
+    """categories = {id: {name, sentiment_type}}. Smartlead has no lead->variant link: step_no/variant None."""
+    rows = []
+    for page in raw_leads_pages:
+        for m in _items(page):
+            cid = m.get("lead_category_id")
+            cat = (categories or {}).get(cid) or {}
+            name = cat.get("name")
+            rows.append({"tool": TOOL, "campaign_id": str(campaign_id), "step_no": None, "variant": None,
+                         "email": (m.get("lead") or {}).get("email"), "status": name,
+                         "replied": int(cid is not None), "positive": int(cat.get("sentiment_type") == "positive"),
+                         "meeting": int("meeting" in (name or "").lower()), "as_of": as_of})
+    return rows
+
+
+def _lead_pages(client, cid):
+    pages, off = [], 0
+    while True:
+        page = client.get("/campaigns/{id}/leads", {"offset": off, "limit": LEAD_LIMIT}, id=cid)
+        pages.append(page)
+        if len(_items(page)) < LEAD_LIMIT:
+            return pages
+        off += LEAD_LIMIT
+
+
 def pull(client, since, until, as_of, campaign_ids=None):
-    out = {"campaigns": [], "steps": [], "stats": []}
+    out = {"campaigns": [], "steps": [], "stats": [], "leads": []}
     out["campaigns"] = norm_campaigns(client.get("/campaigns/"))
     if campaign_ids is not None:
         keep = {str(c) for c in campaign_ids}
         out["campaigns"] = [c for c in out["campaigns"] if c["id"] in keep]
+    cats = {c["id"]: c for c in _items(client.get("/leads/fetch-categories")) if "id" in c} if out["campaigns"] else {}
     for c in out["campaigns"]:
         seqs = client.get("/campaigns/{id}/sequences", id=c["id"])
         ana = client.get("/campaigns/{id}/sequence-analytics", {"start_date": since, "end_date": until}, id=c["id"])
         out["steps"] += norm_steps(c["id"], seqs)
         out["stats"] += norm_stats(c["id"], ana, as_of, seqs)
+        out["leads"] += norm_leads(c["id"], _lead_pages(client, c["id"]), cats, as_of)
     return out

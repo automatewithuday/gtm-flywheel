@@ -214,10 +214,10 @@ def main(argv=None):
     n_campaigns = len({(r["tool"], r["campaign_id"]) for r in rows})
     out = Path(a.out_dir)
     report = out / "reports" / f"{a.as_of}-copy-learnings.md"
-    report.parent.mkdir(exist_ok=True)
+    report.parent.mkdir(parents=True, exist_ok=True)
     report.write_text(render_report(agg, rng, a.as_of, len(rows)))
     playbook = out / "cold-email" / "copy-frameworks" / "PLAYBOOK.md"
-    playbook.write_text(render_playbook(agg, rng, a.as_of, len(rows), n_campaigns))
+    playbook.parent.mkdir(parents=True, exist_ok=True); playbook.write_text(render_playbook(agg, rng, a.as_of, len(rows), n_campaigns))
     print(f"wrote {report}\nwrote {playbook}")
 
 

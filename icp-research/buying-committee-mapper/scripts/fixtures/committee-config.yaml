@@ -1,0 +1,117 @@
+buying_committee:
+  bands:
+    - id: 1-50
+      min: 1
+      max: 50
+    - id: 51-200
+      min: 51
+      max: 200
+    - id: 201-1000
+      min: 201
+      max: 1000
+    - id: 1001+
+      min: 1001
+      max: null
+  slots:
+    decision_maker:
+      titles_by_band:
+        1-50:
+          - founder
+          - co-founder
+          - ceo
+          - owner
+        51-200:
+          - vp sales
+          - head of sales
+          - cro
+          - chief revenue officer
+        201-1000:
+          - vp sales
+          - svp sales
+          - cro
+          - chief revenue officer
+        1001+:
+          - svp sales
+          - cro
+          - chief revenue officer
+          - vp revenue operations
+      negative_titles:
+        - assistant
+        - intern
+        - former
+        - engineering
+        - advisor
+    champion:
+      titles_by_band:
+        1-50:
+          - head of sales
+          - head of growth
+          - sales lead
+        51-200:
+          - director sales
+          - director revenue operations
+          - head of sales development
+          - sales ops
+        201-1000:
+          - director sales development
+          - director revenue operations
+          - director sales enablement
+          - senior director sales
+        1001+:
+          - vp sales development
+          - vp sales enablement
+          - director revenue operations
+          - director sales strategy
+      negative_titles:
+        - assistant
+        - intern
+        - former
+    influencer:
+      titles_by_band:
+        1-50:
+          - sdr
+          - bdr
+          - account executive
+        51-200:
+          - sdr manager
+          - bdr manager
+          - sales development manager
+          - revops manager
+        201-1000:
+          - sdr manager
+          - sales development manager
+          - revenue operations manager
+          - sales enablement manager
+        1001+:
+          - sales development manager
+          - revenue operations manager
+          - sales enablement manager
+      negative_titles:
+        - intern
+        - former
+      max_per_account: 1
+    blocker:
+      titles_by_band:
+        1-50: []
+        51-200:
+          - head of it
+          - it manager
+          - controller
+          - finance
+        201-1000:
+          - procurement
+          - it director
+          - security
+          - legal
+          - marketing operations
+        1001+:
+          - procurement
+          - vendor management
+          - ciso
+          - security
+          - legal
+          - it director
+      negative_titles:
+        - intern
+        - former
+      collapse_below_headcount: 50

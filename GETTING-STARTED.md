@@ -35,7 +35,7 @@ cd gtm-flywheel
 claude
 ```
 
-Claude Code automatically reads the `CLAUDE.md` file in your working directory. This gives it awareness of all 15 skills and how to use them.
+Claude Code automatically reads the `CLAUDE.md` file in your working directory. This gives it awareness of all 28 skills and how to use them.
 
 ### Step 4: Ask for what you need
 
@@ -177,7 +177,7 @@ Any CSV with company name, employee count, industry, and contact information wor
 
 ## Tips for Power Users
 
-1. **Start with one pillar.** Don't try to use all 15 skills at once. Pick the pillar that addresses your biggest current problem and go deep.
+1. **Start with one pillar.** Don't try to use all 28 skills at once. Pick the pillar that addresses your biggest current problem and go deep.
 
 2. **Build your data library.** The skills become exponentially more powerful as you feed them real data — campaign metrics, call transcripts, CRM exports. Start collecting early.
 

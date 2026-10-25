@@ -57,7 +57,7 @@ Every campaign you run makes every future campaign better — but only if you ha
 
 ### The loop actually closes
 
-`flywheel/` makes the diagram real. It pulls outcomes from Smartlead, Instantly, lemlist or HeyReach (read-only, or from a CSV), labels each email with the taxonomy in these skills, ranks what wins with proper confidence intervals, measures which buying signals actually lift positive replies, and opens a pull request that proposes updates to the skills and signal weights with the evidence attached. You merge or reject. Nothing changes without a human. See [flywheel/README.md](flywheel/README.md) or run `/flywheel-learn`.
+`flywheel/` makes the diagram real. It pulls outcomes from Smartlead, Instantly, lemlist or HeyReach (read-only, or from a CSV), labels each email with the taxonomy in these skills, ranks what wins with proper confidence intervals, measures which buying signals actually lift positive replies, and opens a pull request that proposes updates to the skills and signal weights with the evidence attached. You merge or reject. Nothing changes without a human. Smartlead is the default source. It ships with a local Smartlead sandbox so you can run the whole loop without touching your account. See [flywheel/README.md](flywheel/README.md) or run `/flywheel-learn`.
 
 ---
 
@@ -110,7 +110,7 @@ campaign for [your persona] at [your target company type]."
 
 That's it. No setup. No dependencies. No APIs to configure.
 
-**Optional, to make the skills learn from your results:** `cd flywheel && cp .env.example .env`, add a sequencer API key, then `/flywheel-learn`.
+**Optional, to make the skills learn from your results:** `cd flywheel && cp .env.example .env`, add your Smartlead API key, then `/flywheel-learn`. Try it against the sandbox first: `uv run sandbox/smartlead_mock.py`.
 
 **For a detailed walkthrough with 5 starter tasks:** [GETTING-STARTED.md](GETTING-STARTED.md)
 

@@ -23,9 +23,27 @@ cp campaigns.example.toml campaigns.toml   # optional: tag campaigns with person
 uv run python -m unittest discover -s tests -t .   # no network
 ```
 
+## Sandbox first (no account needed)
+
+Smartlead has no public sandbox, so this repo ships one: a local mock of the read endpoints the adapter uses,
+serving the documented payload shapes over real HTTP. Use it the way you would use Postman: watch every request,
+inject rate limits, confirm that writes are refused.
+
+```bash
+uv run sandbox/smartlead_mock.py --rate-limit-every 6        # terminal 1: logs one JSON line per request
+export SMARTLEAD_BASE_URL=http://127.0.0.1:8787/api/v1 SMARTLEAD_API_KEY=sandbox
+uv run pull_outcomes.py --db sandbox.sqlite                  # terminal 2: the real adapter, real urllib, mock server
+uv run learn.py --db sandbox.sqlite --out-dir /tmp/sandbox-out
+```
+
+`tests/test_smartlead_sandbox.py` runs the same thing in-process: pull over HTTP equals the fixture pull, every
+request is an authenticated GET, the adapter survives injected 429s, a POST is refused by the client before any
+network call and by the mock if forced. Unset `SMARTLEAD_BASE_URL` to go back to the production URL.
+
 ## Run
 
-See `.claude/skills/flywheel-learn/SKILL.md` or type `/flywheel-learn` in Claude Code.
+Smartlead is the default and only tool pulled unless you pass `--tools`. See `.claude/skills/flywheel-learn/SKILL.md`
+or type `/flywheel-learn` in Claude Code.
 
 ## Safety
 
@@ -47,7 +65,8 @@ Unverified field assumptions per tool are listed in `adapters/NOTES.md`. Check t
 
 | File | Role |
 |---|---|
-| `pull_outcomes.py` | runs enabled adapters into `outcomes.sqlite` |
+| `pull_outcomes.py` | runs enabled adapters into `outcomes.sqlite` (default: Smartlead only; `<TOOL>_BASE_URL` points at a sandbox) |
+| `sandbox/smartlead_mock.py` | local read-only Smartlead API serving fixture payloads; request log, 429 injection, 405 on writes |
 | `csv_import.py` | same, from a CSV, for users without API access; lead rows via `email` + `status` columns |
 | `signals_import.py` | loads dated signals (`company_domain, signal_type, party, event_date, source_url`) from the CSV your plays or skills produce |
 | `score_signals.py` | party-weight + freshness-window account scorer (ported from martechs outbound plays); reads `signals.toml` |

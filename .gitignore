@@ -8,3 +8,4 @@ flywheel/outcomes.sqlite
 flywheel/.env
 .env
 flywheel/.venv/
+flywheel/*.sqlite

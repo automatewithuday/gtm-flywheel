@@ -14,10 +14,10 @@ ALLOW = {
 }
 
 
-def make_client(api_key, dry_run=False):
+def make_client(api_key, dry_run=False, base_url=None):
     import base64
     tok = base64.b64encode(f":{api_key}".encode()).decode()  # Basic auth: empty user, key as password
-    return _http.Client(TOOL, BASE_URL, ALLOW, headers={"Authorization": f"Basic {tok}"},
+    return _http.Client(TOOL, base_url or BASE_URL, ALLOW, headers={"Authorization": f"Basic {tok}"},
                         dry_run=dry_run, min_interval=0.1)  # 20 req / 2 s
 
 

@@ -15,8 +15,8 @@ MESSAGE_NODES = {"CONNECTION_REQUEST", "MESSAGE", "INMAIL"}
 POSITIVE_TAG = "Interested"
 
 
-def make_client(api_key, dry_run=False):
-    return _http.Client(TOOL, BASE_URL, ALLOW, headers={"X-API-KEY": api_key},
+def make_client(api_key, dry_run=False, base_url=None):
+    return _http.Client(TOOL, base_url or BASE_URL, ALLOW, headers={"X-API-KEY": api_key},
                         dry_run=dry_run, min_interval=0.2)  # 300 req/min
 
 

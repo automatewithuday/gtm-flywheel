@@ -15,11 +15,11 @@ class NotAllowed(Exception):
 
 
 class Client:
-    def __init__(self, tool, base_url, allow, headers=None, query=None, dry_run=False, min_interval=0.0):
+    def __init__(self, tool, base_url, allow, headers=None, query=None, dry_run=False, min_interval=0.0, backoff=5.0):
         self.tool, self.base_url, self.allow = tool, base_url.rstrip("/"), set(allow)
         self.headers = {"Accept": "application/json", **(headers or {})}
         self.query = dict(query or {})          # e.g. Smartlead's api_key query param
-        self.dry_run, self.min_interval = dry_run, min_interval
+        self.dry_run, self.min_interval, self.backoff = dry_run, min_interval, backoff
         self.calls, self._last = [], 0.0
 
     def get(self, template, params=None, **path_vars):
@@ -56,7 +56,7 @@ class Client:
             except urllib.error.HTTPError as e:
                 self._last = time.monotonic()
                 if e.code in (429, 500, 502, 503, 504) and attempt < retries - 1:
-                    time.sleep(2 ** attempt * 5)   # ponytail: fixed backoff; none of the 4 APIs send Retry-After
+                    time.sleep(self.backoff * 2 ** attempt)   # ponytail: fixed backoff; none of the 4 APIs send Retry-After
                     continue
                 raise
         return {}

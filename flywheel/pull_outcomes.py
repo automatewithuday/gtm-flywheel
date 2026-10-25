@@ -1,8 +1,10 @@
 """Pull outreach outcomes (read-only) from every tool that has a key in flywheel/.env into outcomes.sqlite.
 
   uv run pull_outcomes.py --dry-run                 # print the exact requests, no network
-  uv run pull_outcomes.py --tools smartlead --campaign-ids 12345   # one campaign first
-  uv run pull_outcomes.py --since 2026-01-01
+  uv run pull_outcomes.py --campaign-ids 12345      # one campaign first (Smartlead is the default tool)
+  uv run pull_outcomes.py --tools smartlead instantly --since 2026-01-01
+
+Sandbox (no account): set SMARTLEAD_BASE_URL to a running `sandbox/smartlead_mock.py`; see flywheel/README.md.
 """
 import argparse
 import datetime as dt
@@ -14,6 +16,7 @@ from pathlib import Path
 import db
 
 TOOLS = ["smartlead", "instantly", "lemlist", "heyreach"]
+DEFAULT_TOOLS = ["smartlead"]
 
 
 def load_env(path=Path(__file__).parent / ".env"):
@@ -26,7 +29,7 @@ def load_env(path=Path(__file__).parent / ".env"):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--tools", nargs="*", default=TOOLS)
+    ap.add_argument("--tools", nargs="*", default=DEFAULT_TOOLS, choices=TOOLS)
     ap.add_argument("--since", default=(dt.date.today() - dt.timedelta(days=90)).isoformat())
     ap.add_argument("--until", default=dt.date.today().isoformat())
     ap.add_argument("--campaign-ids", nargs="*")
@@ -42,7 +45,10 @@ def main(argv=None):
             print(f"skip {tool}: no {tool.upper()}_API_KEY in flywheel/.env")
             continue
         mod = importlib.import_module(f"adapters.{tool}")
-        client = mod.make_client(key, dry_run=a.dry_run)
+        base = os.environ.get(f"{tool.upper()}_BASE_URL")          # sandbox / mock override; production URL otherwise
+        client = mod.make_client(key, dry_run=a.dry_run, base_url=base)
+        if base:
+            print(f"{tool}: using sandbox base URL {base}")
         rows = mod.pull(client, a.since, a.until, a.until, campaign_ids=a.campaign_ids)
         ran += 1
         n = {k: len(v) for k, v in rows.items()}

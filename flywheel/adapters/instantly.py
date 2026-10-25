@@ -17,8 +17,8 @@ ALLOW = {("GET", "/campaigns"), ("GET", "/campaigns/{id}"), ("GET", "/campaigns/
 POSITIVE, MEETING = {1, 2, 3, 4}, {2, 3, 4}
 
 
-def make_client(api_key, dry_run=False):
-    return _http.Client(TOOL, BASE_URL, ALLOW, headers={"Authorization": f"Bearer {api_key}"}, dry_run=dry_run)
+def make_client(api_key, dry_run=False, base_url=None):
+    return _http.Client(TOOL, base_url or BASE_URL, ALLOW, headers={"Authorization": f"Bearer {api_key}"}, dry_run=dry_run)
 
 
 class _Text(html.parser.HTMLParser):

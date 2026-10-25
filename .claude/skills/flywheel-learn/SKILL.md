@@ -10,7 +10,10 @@ any request that is not on the adapter's read allowlist.
 
 ## Steps
 
-1. **Pull** (first time on a new account: dry-run, then one campaign, then all)
+0. **Sandbox** (first time, or after changing an adapter): `uv run sandbox/smartlead_mock.py` in one terminal, then export
+   `SMARTLEAD_BASE_URL=http://127.0.0.1:8787/api/v1 SMARTLEAD_API_KEY=sandbox` and run steps 1-3 against `--db sandbox.sqlite`.
+   Unset `SMARTLEAD_BASE_URL` before touching the real account.
+1. **Pull** (first time on a new account: dry-run, then one campaign, then all). Smartlead is the default tool.
    ```bash
    cd flywheel
    uv run pull_outcomes.py --dry-run

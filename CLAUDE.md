@@ -94,6 +94,7 @@ Cross-pillar connections:
 
 `flywheel/` turns campaign outcomes into proposed skill updates. Run it with `/flywheel-learn`.
 - Read-only by construction: adapters can only call allowlisted read endpoints. Never add a write endpoint without asking.
+- Test against `flywheel/sandbox/smartlead_mock.py` (set `SMARTLEAD_BASE_URL`), never against the live Smartlead account; there is one account and live campaigns run on it.
 - `cold-email/copy-frameworks/PLAYBOOK.md` is generated; edit the skill, not the playbook.
 - Skill changes arrive as PRs on `flywheel/<date>` branches with evidence. Humans merge.
 - Human-owned: `flywheel/campaigns.toml`, `flywheel/signals.toml` and all threshold tables. Propose changes, never apply them silently.

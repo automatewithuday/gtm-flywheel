@@ -65,7 +65,7 @@ When you need to perform any GTM task, follow this process:
 ### Infrastructure
 | Skill | Path | Use When |
 |-------|------|----------|
-| Email Gateway Detection | `infrastructure/email-gateway-detection/SKILL.md` | Finding the secure email gateway or mailbox provider behind each domain |
+| Email Gateway Detection | `infrastructure/email-gateway-detection/SKILL.md` | Finding the secure email gateway, mailbox provider and DNS-verified SaaS tools behind each domain |
 | Email Waterfall | `infrastructure/email-waterfall/SKILL.md` | Finding and verifying work emails for people missing them |
 
 ## Workflow Connections

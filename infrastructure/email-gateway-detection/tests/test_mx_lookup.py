@@ -65,3 +65,23 @@ def test_nxdomain():
 
 def test_domain_parsing():
     assert m.domain_of({"email": "Jane@WWW.Acme.com"}) == "acme.com"
+
+
+def test_dns_tools_from_txt_tokens_and_spf():
+    r = run(mx=[(1, "aspmx.l.google.com")], txt=[
+        "google-site-verification=abc", "ms=ms123", "docusign=1", "atlassian-domain-verification=a",
+        "atlassian-domain-verification=b", "00d36000000kfwn=1tbpm0000000sqj",
+        "v=spf1 include:_spf.google.com include:mail.zendesk.com include:sendgrid.net ~all"])
+    assert r["dns_tools"] == "atlassian|docusign|google_search_console|microsoft_365|salesforce|sendgrid|zendesk"
+    assert run(mx=[(1, "aspmx.l.google.com")])["dns_tools"] == ""
+
+
+def test_cache_entry_without_dns_tools_is_refreshed():
+    rows = [{"domain": "acme.com"}]
+    old = {"seg_vendor": "none", "mailbox_provider": "google", "seg_source": "dns", "mailbox_source": "dns_mx",
+           "seg_status": "ok", "mx_hosts": "aspmx.l.google.com", "seg_checked_at": "2099-01-01T00:00:00+00:00",
+           "seg_conflict": "false"}
+    cache = {"acme.com": dict(old)}
+    client = Fake(mx=[(1, "aspmx.l.google.com")], txt=["docusign=1"])
+    assert m.tag_rows(rows, cache, client=client, gmap=GMAP) == 1
+    assert rows[0]["dns_tools"] == cache["acme.com"]["dns_tools"] == "docusign"

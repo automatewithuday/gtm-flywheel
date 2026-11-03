@@ -4,7 +4,8 @@
   python detect_gateway.py --in domains.csv --out final.csv
 
 Input needs a `domain` or `email` column. Every row gets seg_vendor (proofpoint, mimecast,
-barracuda, cisco, ..., none, unknown) and mailbox_provider (google, microsoft, zoho, other).
+barracuda, cisco, ..., none, unknown), mailbox_provider (google, microsoft, zoho, other) and
+dns_tools (pipe-separated SaaS slugs from TXT verification tokens and SPF includes, free).
 
 What runs, in order:
   Stage 1  free DNS on every row (skipped if the CSV already has seg_vendor from mx_lookup.py).
@@ -198,7 +199,7 @@ def run(rows: list[dict], stage: str, gmap: dict, call=None, cache: dict | None 
             if r["domain"] in results:
                 apply_prospeo(r, results[r["domain"]], gmap)
                 if cache is not None and r["seg_vendor"] != "unknown" and r["domain"] in cache:
-                    cache[r["domain"]].update({k: r[k] for k in FIELDS if k != "domain"})
+                    cache[r["domain"]].update({k: r.get(k, "") for k in FIELDS if k != "domain"})  # pre-dns_tools rows lack the column
 
     if "3" in stage:
         seen: dict[str, dict | None] = {}  # one call per real email, or per domain when using info@ fallback
@@ -253,7 +254,7 @@ def main(argv: list[str] | None = None) -> int:
     stats = run(rows, a.stage, gmap, cache=cache, only_unknown=not a.all)
     for r in rows:  # write paid answers back so the next run gets them free
         if r["seg_source"] != "dns" and r["domain"] in cache:
-            cache[r["domain"]].update({k: r[k] for k in FIELDS if k != "domain"})
+            cache[r["domain"]].update({k: r.get(k, "") for k in FIELDS if k != "domain"})  # pre-dns_tools rows lack the column
     cache_path.write_text(json.dumps(cache, indent=1))
     out_fields = list(dict.fromkeys(list(rows[0].keys()) + FIELDS + EXTRA_FIELDS))
     with open(a.out, "w", newline="") as f:

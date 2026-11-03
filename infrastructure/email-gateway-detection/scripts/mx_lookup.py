@@ -6,7 +6,8 @@ Usage:
 
 Input CSV needs an `email` or `domain` column. Output keeps every input column
 and appends the schema fields documented in SKILL.md. One DNS lookup per unique
-domain; results are cached so reruns and big lists stay cheap.
+domain; results are cached so reruns and big lists stay cheap. The TXT record is read once per
+domain: SPF for the mailbox provider, verification tokens and SPF includes for `dns_tools`.
 
 Requires: pip install dnspython
 """
@@ -25,7 +26,7 @@ import dns.resolver
 MAP_PATH = Path(__file__).resolve().parent.parent / "references" / "gateway-map.json"
 FIELDS = [
     "domain", "seg_vendor", "mailbox_provider", "seg_source", "mailbox_source",
-    "seg_status", "mx_hosts", "seg_checked_at", "seg_conflict",
+    "seg_status", "mx_hosts", "seg_checked_at", "seg_conflict", "dns_tools",
 ]
 
 
@@ -41,6 +42,14 @@ def _match_suffix(host: str, table: dict, key: str) -> str | None:
             if (host == suffix or host.endswith("." + suffix)) and len(suffix) > best_len:
                 best, best_len = name, len(suffix)
     return best
+
+
+def tools_of(txt: list[str], tools: dict) -> str:
+    """Pipe-joined vendor slugs from TXT verification tokens and SPF includes (SKILL.md, dns_tools)."""
+    found = {slug for t in txt for prefix, slug in tools["txt_prefixes"].items() if t.startswith(prefix)}
+    spf = next((t for t in txt if t.startswith("v=spf1")), "")
+    found |= {slug for needle, slug in tools["spf_includes"].items() if needle in spf}
+    return "|".join(sorted(found))
 
 
 class DnsClient:
@@ -67,7 +76,7 @@ def classify(domain: str, client: DnsClient, gmap: dict) -> dict:
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     row = {"domain": domain, "seg_vendor": "", "mailbox_provider": "", "seg_source": "dns",
            "mailbox_source": "", "seg_status": "ok", "mx_hosts": "",
-           "seg_checked_at": now, "seg_conflict": "false"}
+           "seg_checked_at": now, "seg_conflict": "false", "dns_tools": ""}
     try:
         mx = client.mx(domain)
     except dns.resolver.NXDOMAIN:
@@ -104,8 +113,9 @@ def classify(domain: str, client: DnsClient, gmap: dict) -> dict:
                 row["mailbox_provider"], row["mailbox_source"] = prov, "dns_mx"
                 row["seg_vendor"] = "none"
                 break
+    txt = client.txt(domain)  # one TXT query: SPF for the provider, tokens and includes for dns_tools
     if not row["mailbox_provider"]:
-        spf = next((t for t in client.txt(domain) if t.startswith("v=spf1")), "")
+        spf = next((t for t in txt if t.startswith("v=spf1")), "")
         for prov, entry in gmap["mailbox_providers"].items():
             if any(f"include:{inc}" in spf for inc in entry["spf_includes"]):
                 row["mailbox_provider"], row["mailbox_source"] = prov, "dns_spf"
@@ -114,6 +124,7 @@ def classify(domain: str, client: DnsClient, gmap: dict) -> dict:
         row["mailbox_provider"] = "other"
     if not row["seg_vendor"]:
         row["seg_vendor"] = "unknown"  # self-hosted or unmapped host: send to Stage 2
+    row["dns_tools"] = tools_of(txt, gmap["tools"])
     return row
 
 
@@ -132,7 +143,8 @@ def tag_rows(rows: list[dict], cache: dict, ttl_days: int = 45, client: DnsClien
     for rec in rows:
         d = domain_of(rec)
         hit = cache.get(d)
-        if not hit or datetime.fromisoformat(hit["seg_checked_at"]) < cutoff:
+        # entries from before dns_tools existed are looked up once more so the column fills
+        if not hit or "dns_tools" not in hit or datetime.fromisoformat(hit["seg_checked_at"]) < cutoff:
             hit = classify(d, client, gmap)
             looked_up += 1
             if hit["seg_status"] not in ("timeout", "servfail"):
